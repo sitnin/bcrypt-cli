@@ -1,0 +1,15 @@
+[package]
+name = "bcrypt-cli"
+version = "0.1.0"
+authors = ["Gregory Sitnin <greg@sitnin.com>"]
+homepage = "https://github.com/sitnin/bcrypt-cli"
+repository = "https://github.com/sitnin/bcrypt-cli.git"
+edition = "2018"
+
+[dependencies]
+getopts = "0.2.21"
+bcrypt = "0.6.3"
+
+[[bin]]
+name = "bcrypt"
+path = "src/main.rs"
