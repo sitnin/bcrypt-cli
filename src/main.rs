@@ -28,8 +28,6 @@ fn print_usage(program: &str, opts: Options) {
     print!("{}", opts.usage(&brief));
 }
 
-// TODO: Replace panic! with human readable error messages
-
 fn main() {
     let args: Vec<String> = env::args().collect();
     let program = args[0].clone();
