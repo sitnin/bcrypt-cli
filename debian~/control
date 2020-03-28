@@ -1,0 +1,13 @@
+Source: bcrypt-cli
+Section: utils
+Priority: optional
+Maintainer: Gregory Sitnin <greg@sitnin.com>
+Build-Depends: rustc (>=1.40)
+Standards-Version: 4.0.0
+Vcs-Git: https://github.com/sitnin/bcrypt-cli.git
+Homepage: https://github.com/sitnin/bcrypt-cli
+
+Package: bcrypt-cli
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: bcrypt string hashing cli tool

@@ -44,11 +44,11 @@ $ bcrypt TestStr
 
 ## ToDo(-da-bee-da-bee-doo)
 
-[ ] Wrap code with tests (ha-ha!)
-[ ] Replace panic! with human readable error messages
-[ ] Make .deb build script and package
-[ ] Create ppa for debian/ubuntu/mint/whatever
-[ ] Use github's ci/cd for release deployment to ppa
+- [ ] Wrap code with tests (ha-ha!)
+- [ ] Replace panic! with human readable error messages
+- [ ] Make .deb build script and package
+- [ ] Create ppa for debian/ubuntu/mint/whatever
+- [ ] Use github's ci/cd for release deployment to ppa
 
 ## Contributing
 
