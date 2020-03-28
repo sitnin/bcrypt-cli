@@ -1,0 +1,5 @@
+bcrypt-cli (1.0.1-ubuntu0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Gregory Sitnin <sitnin@unknown>  Sat, 28 Mar 2020 02:33:27 +0300

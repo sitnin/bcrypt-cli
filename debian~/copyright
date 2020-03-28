@@ -1,0 +1,14 @@
+
+For dh_make to find the package name and version, the current directory
+needs to be in the format of <package>-<version>.  Alternatively use the
+_-p flag using the format <name>_<version> to override it.
+The directory name you have specified is invalid!
+
+Your current directory is:
+/home/sitnin/Projects/bcrypt/debian
+Perhaps you could try going to directory where the sources are?
+
+Please note that this change is necessary ONLY during the initial
+Debianization with dh_make.  When building the package, dpkg-source
+will gracefully handle almost any upstream tarball.
+            
