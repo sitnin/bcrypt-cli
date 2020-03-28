@@ -5,7 +5,7 @@ use std::string::String;
 extern crate bcrypt;
 extern crate getopts;
 
-use bcrypt::{hash, DEFAULT_COST};
+use bcrypt::{hash, verify, DEFAULT_COST};
 use getopts::Options;
 
 fn grab_input() -> String {
@@ -45,8 +45,18 @@ fn main() {
     let program = args[0].clone();
 
     let mut opts = Options::new();
-    opts.optopt("c", "cost", "set desired encrypting cost in rounds", "COST");
-    opts.optflag("s", "short", "print hashed string only");
+    opts.optopt(
+        "c",
+        "cost",
+        "set desired encrypting cost in rounds",
+        "ROUNDS",
+    );
+    opts.optopt("v", "verify", "hash for verification", "HASH");
+    opts.optflag(
+        "s",
+        "short",
+        "print hashed string or verification result only",
+    );
     opts.optflag("h", "help", "print this help menu");
 
     let matches = match opts.parse(&args[1..]) {
@@ -59,14 +69,6 @@ fn main() {
         return;
     }
 
-    let cost: u32 = match matches.opt_str("c") {
-        Some(s) => match s.parse::<u32>() {
-            Ok(r) => r,
-            Err(r) => panic!(r),
-        },
-        None => DEFAULT_COST,
-    };
-
     let input_str: String = if matches.free.is_empty() {
         print_usage(&program, opts);
         return;
@@ -78,11 +80,31 @@ fn main() {
         }
     };
 
-    let result = hash(&input_str, cost).ok().unwrap();
+    let cost: u32 = match matches.opt_str("c") {
+        Some(s) => match s.parse::<u32>() {
+            Ok(r) => r,
+            Err(r) => panic!(r),
+        },
+        None => DEFAULT_COST,
+    };
+
+    let re_output: String = match matches.opt_str("v") {
+        Some(vh) => match verify(&input_str, &vh) {
+            Ok(r) => match r {
+                true => String::from("YES"),
+                false => String::from("NO"),
+            },
+            Err(err) => format!("ERROR: {}", &err).to_string(),
+        },
+        None => hash(&input_str, cost).ok().unwrap(),
+    };
 
     if matches.opt_present("s") {
-        println!("{}", result);
+        println!("{}", re_output);
     } else {
-        println!("[{}] ({}) => [{}]", input_str, cost, result);
+        match matches.opt_str("v") {
+            Some(vh) => println!("[{}] =?= [{}] => [{}]", input_str, vh, re_output),
+            None => println!("[{}] ({}) => [{}]", input_str, cost, re_output),
+        }
     }
 }
