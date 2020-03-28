@@ -11,22 +11,20 @@ Personally I host `bcrypt` binary in `$HOME/bin`. It is what this tool was creat
 ## Usage
 
 ```bash
-bcrypt [-s] [-c ROUNDS] INPUT_STRING
+$ bcrypt [options] INPUT
 ```
 
-to hash string from CLI args, or
-
-```bash
-bcrypt [-s] [-c ROUNDS] -
-```
-
-to hash string read from stdin.
-
-### -c | --cost ROUNDS
+## Option `--cost=ROUNDS` | `-c ROUNDS`
 
 Sets number of rounds for bcrypt hashing function. Default: 12, minimum: 4.
 
-### -s | --short
+## Option `--verify=HASH` | `-v HASH`
+
+Switches app to hash verification mode and sets the hash to test `INPUT` against of.
+
+In this case, program's output will be just "YES", "NO" or "ERROR" (with error message).
+
+## Flag `--short` | `-s`
 
 This flag switches output. If short mode is enabled, tool's output will be:
 
@@ -45,6 +43,7 @@ $ bcrypt TestStr
 ## ToDo(-da-bee-da-bee-doo)
 
 - [ ] Wrap code with tests (ha-ha!)
+- [x] Add hash verification mode
 - [ ] Replace panic! with human readable error messages
 - [ ] Make .deb build script and package
 - [ ] Create ppa for debian/ubuntu/mint/whatever

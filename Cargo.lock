@@ -21,7 +21,7 @@ dependencies = [
 
 [[package]]
 name = "bcrypt-cli"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
  "bcrypt",
  "getopts",
