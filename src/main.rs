@@ -24,7 +24,19 @@ fn grab_input() -> String {
 }
 
 fn print_usage(program: &str, opts: Options) {
-    let brief = format!("Usage: {} [options] INPUT", program);
+    let brief = format!(
+        "Usage: {} [options] INPUT
+
+        -c ROUNDS            -- set hashing cost in rounds (default: 12)
+        --cost=ROUNDS
+
+        -s                   -- set sime-silent mode (outputs only hash or verification result)
+        --short
+
+        -v HASH              -- switch to hash verification mode (will output only YES, NO or ERROR)
+        --verify HASH",
+        program
+    );
     print!("{}", opts.usage(&brief));
 }
 
