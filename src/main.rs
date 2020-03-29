@@ -30,20 +30,20 @@ fn print_usage(program: &str, opts: Options) {
 fn define_options() -> Options {
     let mut opts = Options::new();
     opts.optopt(
-        "c",
+        "r",
         "cost",
         "set hashing cost in rounds (default: 12)",
         "ROUNDS",
     );
     opts.optopt(
-        "v",
+        "t",
         "verify",
         "switch to hash verification mode (will output only YES, NO or ERROR)",
         "HASH",
     );
     opts.optflag(
         "s",
-        "short",
+        "silent",
         "set semi-silent mode (outputs only hash or verification result)",
     );
     opts.optflag("h", "help", "print this help menu");
