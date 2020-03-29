@@ -73,12 +73,12 @@ fn main() {
         }
     };
 
-    let cost: u32 = match matches.opt_str("c") {
-        Some(s) => match s.parse::<u32>() {
-            Ok(r) => r,
-            Err(r) => panic!(r),
+    let cost: u32 = match matches.opt_get::<u32>("c") {
+        Ok(c) => match c {
+            Some(r) => r,
+            None => DEFAULT_COST,
         },
-        None => DEFAULT_COST,
+        Err(err) => panic!(err),
     };
 
     let re_output: String = match matches.opt_str("v") {
