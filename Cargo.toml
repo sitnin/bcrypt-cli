@@ -1,6 +1,6 @@
 [package]
 name = "bcrypt-cli"
-version = "1.1.0"
+version = "1.1.1-0"
 authors = ["Gregory Sitnin <greg@sitnin.com>"]
 homepage = "https://github.com/sitnin/bcrypt-cli"
 repository = "https://github.com/sitnin/bcrypt-cli.git"
