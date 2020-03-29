@@ -28,10 +28,7 @@ fn print_usage(program: &str, opts: Options) {
     print!("{}", opts.usage(&brief));
 }
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    let program = args[0].clone();
-
+fn define_options() -> Options {
     let mut opts = Options::new();
     opts.optopt(
         "c",
@@ -51,6 +48,15 @@ fn main() {
         "set semi-silent mode (outputs only hash or verification result)",
     );
     opts.optflag("h", "help", "print this help menu");
+
+    opts
+}
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let program = args[0].clone();
+
+    let opts = define_options();
 
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => m,
