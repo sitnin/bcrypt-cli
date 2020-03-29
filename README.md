@@ -11,29 +11,35 @@ Personally I host `bcrypt` binary in `$HOME/bin`. It is what this tool was creat
 ## Usage
 
 ```bash
-$ bcrypt [options] INPUT
+$ bcrypt [options] [INPUT]
 ```
 
-## Option `--cost=ROUNDS` | `-c ROUNDS`
+## INPUT
+
+Sets string for hashing.
+
+If not set, program will read string from STDIN (without a prompt).
+
+## Option `--cost=ROUNDS` | `-r ROUNDS`
 
 Sets number of rounds for bcrypt hashing function. Default: 12, minimum: 4.
 
-## Option `--verify=HASH` | `-v HASH`
+## Option `--verify=HASH` | `-t HASH`
 
 Switches app to hash verification mode and sets the hash to test `INPUT` against of.
 
 In this case, program's output will be just "YES", "NO" or "ERROR" (with error message).
 
-## Flag `--short` | `-s`
+## Flag `--silent` | `-s`
 
-This flag switches output. If short mode is enabled, tool's output will be:
+Switch output to semi-silent mode. If set, tool's output will look like:
 
 ```bash
 $ bcrypt -s TestStr
 $2b$12$lpu4zphyiVtcg3TR3vDxpeu.u/XkA35aE1j9yobJGjUx0EUPwXMjy
 ```
 
-otherwise this will look like:
+otherwise it more human-readable:
 
 ```bash
 $ bcrypt TestStr
@@ -44,7 +50,8 @@ $ bcrypt TestStr
 
 - [ ] Wrap code with tests (ha-ha!)
 - [x] Add hash verification mode
-- [ ] Replace panic! with human readable error messages
+- [x] Replace panic! with human readable error messages
+- [ ] Version info printing
 - [ ] Make .deb build script and package
 - [ ] Create ppa for debian/ubuntu/mint/whatever
 - [ ] Use github's ci/cd for release deployment to ppa
