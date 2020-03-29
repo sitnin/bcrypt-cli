@@ -82,7 +82,7 @@ fn main() {
         matches.free[0].clone()
     };
 
-    let cost: u32 = match matches.opt_get::<u32>("c") {
+    let cost: u32 = match matches.opt_get::<u32>("r") {
         Ok(c) => match c {
             Some(r) => r,
             None => DEFAULT_COST,
@@ -93,7 +93,7 @@ fn main() {
         }
     };
 
-    let output: String = match matches.opt_str("v") {
+    let output: String = match matches.opt_str("t") {
         Some(vh) => match verify(&input, &vh) {
             Ok(r) => match r {
                 true => String::from("YES"),
@@ -107,7 +107,7 @@ fn main() {
     if matches.opt_present("s") {
         println!("{}", output);
     } else {
-        match matches.opt_str("v") {
+        match matches.opt_str("t") {
             Some(hash) => println!("[{}] =?= [{}] => [{}]", input, hash, output),
             None => println!("[{}] ({}) => [{}]", input, cost, output),
         }
