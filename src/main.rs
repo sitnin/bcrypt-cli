@@ -70,7 +70,7 @@ fn main() {
         return;
     }
 
-    let input_str: String = if matches.free.is_empty() {
+    let input: String = if matches.free.is_empty() {
         match grab_input() {
             Some(s) => s,
             None => {
@@ -93,23 +93,23 @@ fn main() {
         }
     };
 
-    let re_output: String = match matches.opt_str("v") {
-        Some(vh) => match verify(&input_str, &vh) {
+    let output: String = match matches.opt_str("v") {
+        Some(vh) => match verify(&input, &vh) {
             Ok(r) => match r {
                 true => String::from("YES"),
                 false => String::from("NO"),
             },
             Err(err) => format!("ERROR: {}", &err).to_string(),
         },
-        None => hash(&input_str, cost).ok().unwrap(),
+        None => hash(&input, cost).ok().unwrap(),
     };
 
     if matches.opt_present("s") {
-        println!("{}", re_output);
+        println!("{}", output);
     } else {
         match matches.opt_str("v") {
-            Some(vh) => println!("[{}] =?= [{}] => [{}]", input_str, vh, re_output),
-            None => println!("[{}] ({}) => [{}]", input_str, cost, re_output),
+            Some(hash) => println!("[{}] =?= [{}] => [{}]", input, hash, output),
+            None => println!("[{}] ({}) => [{}]", input, cost, output),
         }
     }
 }
