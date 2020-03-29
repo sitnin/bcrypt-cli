@@ -11,8 +11,14 @@ Personally I host `bcrypt` binary in `$HOME/bin`. It is what this tool was creat
 ## Usage
 
 ```bash
-$ bcrypt [options] INPUT
+$ bcrypt [options] [INPUT]
 ```
+
+## INPUT
+
+Sets string for hashing.
+
+If not set, program will read string from STDIN (without a prompt).
 
 ## Option `--cost=ROUNDS` | `-c ROUNDS`
 

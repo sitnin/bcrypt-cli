@@ -24,7 +24,7 @@ fn grab_input() -> String {
 }
 
 fn print_usage(program: &str, opts: Options) {
-    let brief = format!("Usage: {} [options] INPUT | -", program);
+    let brief = format!("Usage: {} [options] [INPUT]", program);
     print!("{}", opts.usage(&brief));
 }
 
@@ -69,14 +69,9 @@ fn main() {
     }
 
     let input_str: String = if matches.free.is_empty() {
-        print_usage(&program, opts);
-        return;
+        grab_input()
     } else {
-        let input_src = matches.free[0].clone();
-        match input_src.as_str() {
-            "-" => grab_input(),
-            _ => input_src,
-        }
+        matches.free[0].clone()
     };
 
     let cost: u32 = match matches.opt_get::<u32>("c") {
