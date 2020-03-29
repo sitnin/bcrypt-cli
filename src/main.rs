@@ -24,19 +24,7 @@ fn grab_input() -> String {
 }
 
 fn print_usage(program: &str, opts: Options) {
-    let brief = format!(
-        "Usage: {} [options] INPUT
-
-        -c ROUNDS            -- set hashing cost in rounds (default: 12)
-        --cost=ROUNDS
-
-        -s                   -- set sime-silent mode (outputs only hash or verification result)
-        --short
-
-        -v HASH              -- switch to hash verification mode (will output only YES, NO or ERROR)
-        --verify HASH",
-        program
-    );
+    let brief = format!("Usage: {} [options] INPUT | -", program);
     print!("{}", opts.usage(&brief));
 }
 
@@ -48,14 +36,19 @@ fn main() {
     opts.optopt(
         "c",
         "cost",
-        "set desired encrypting cost in rounds",
+        "set hashing cost in rounds (default: 12)",
         "ROUNDS",
     );
-    opts.optopt("v", "verify", "hash for verification", "HASH");
+    opts.optopt(
+        "v",
+        "verify",
+        "switch to hash verification mode (will output only YES, NO or ERROR)",
+        "HASH",
+    );
     opts.optflag(
         "s",
         "short",
-        "print hashed string or verification result only",
+        "set semi-silent mode (outputs only hash or verification result)",
     );
     opts.optflag("h", "help", "print this help menu");
 
