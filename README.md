@@ -50,7 +50,7 @@ $ bcrypt TestStr
 
 - [ ] Wrap code with tests (ha-ha!)
 - [x] Add hash verification mode
-- [ ] Replace panic! with human readable error messages
+- [x] Replace panic! with human readable error messages
 - [ ] Make .deb build script and package
 - [ ] Create ppa for debian/ubuntu/mint/whatever
 - [ ] Use github's ci/cd for release deployment to ppa

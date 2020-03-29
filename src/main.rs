@@ -8,19 +8,18 @@ extern crate getopts;
 use bcrypt::{hash, verify, DEFAULT_COST};
 use getopts::Options;
 
-fn grab_input() -> String {
+fn grab_input() -> Option<String> {
     let mut input = String::new();
     match io::stdin().read_line(&mut input) {
-        Ok(_n) => {
-            let trimmed = input.as_str().trim().to_string();
-            if trimmed.len() > 0 {
-                trimmed
-            } else {
-                panic!("Empty input")
-            }
-        }
-        Err(error) => panic!(error),
+        Ok(_n) => Some(input.as_str().trim().to_string()),
+        Err(_err) => None,
     }
+}
+
+fn exit_with_message_and_usage(code: i32, msg: String, program: &str, opts: Options) {
+    println!("{}", msg);
+    print_usage(program, opts);
+    std::process::exit(code);
 }
 
 fn print_usage(program: &str, opts: Options) {
@@ -60,7 +59,10 @@ fn main() {
 
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => m,
-        Err(f) => panic!(f.to_string()),
+        Err(err) => {
+            exit_with_message_and_usage(-1, format!("{}", err), &program, opts);
+            return;
+        }
     };
 
     if matches.opt_present("h") {
@@ -69,7 +71,13 @@ fn main() {
     }
 
     let input_str: String = if matches.free.is_empty() {
-        grab_input()
+        match grab_input() {
+            Some(s) => s,
+            None => {
+                exit_with_message_and_usage(-1, String::from("No input"), &program, opts);
+                return;
+            }
+        }
     } else {
         matches.free[0].clone()
     };
@@ -79,7 +87,10 @@ fn main() {
             Some(r) => r,
             None => DEFAULT_COST,
         },
-        Err(err) => panic!(err),
+        Err(err) => {
+            exit_with_message_and_usage(-1, format!("{}", err), &program, opts);
+            return;
+        }
     };
 
     let re_output: String = match matches.opt_str("v") {
